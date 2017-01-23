@@ -1,6 +1,8 @@
 /**
  * Created by jessietang on 12/16/2016.
  */
+
+//angular1.5引入组件的概念，并用component来替代directive来创建组件
 angular.module('phoneList')
 .component('phoneList',{
         templateUrl: 'phone-list/phone-list.template.html',
@@ -40,6 +42,7 @@ angular.module('phoneList')
 
         controller: ['Phone',function PhoneListController(Phone){
             this.phones = Phone.query(); //用了ngResource之后的变化点
+            //query() 和 get()方法之间的唯一区别是AngularJS期望query()方法返回数组
             this.orderProp = 'age';
         }]
     });

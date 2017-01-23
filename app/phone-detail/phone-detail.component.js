@@ -20,6 +20,7 @@ angular.module('phoneDetail').
 
         controller: ['$routeParams','Phone', function PhoneDetailController($routeParams,Phone){
             var self = this;
+            //query() 和 get()方法之间的唯一区别是AngularJS期望query()方法返回数组
             self.phone = Phone.get({phoneId:$routeParams.phoneId}, function(phone){
                 self.setImage(phone.images[0]);
             });

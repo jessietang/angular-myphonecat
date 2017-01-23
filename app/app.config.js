@@ -13,7 +13,7 @@ angular.module('phonecatApp')
         $routeProvider.
             when('/phones',{
             template: '<phone-list></phone-list>'
-        }).
+            }).
             when('/phones/:phoneId',{ /*开始点击单个产品一直不跳转，原因是这里写成了：' phones/:phoneId '  */
                 template: '<phone-detail></phone-detail>'
             }).

@@ -1,37 +1,40 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-2">
-            <div>search: <input type="text" ng-model="$ctrl.query"/></div>
-            <div>
-                search by:
-                <select name="" id="" ng-model="$ctrl.orderProp">
-                    <option value="name">name</option>
-                    <option value="age">newest</option>
+            <!--Sidebar content-->
+            <p>
+                Search: <input type="text" ng-model="$ctrl.query"/>
+            </p>
+
+            <!--新增选择框，绑定$ctrl.orderProp-->
+            <p>
+                Sort by:
+                <select ng-model="$ctrl.orderProp">
+                    <option value="name">Name</option>
+                    <option value="age">Newest</option>
                 </select>
-            </div>
-            <!--反转排序只需要在排序值前面添加一个-号：
-            <option value="-age">Oldest</option>-->
-            <p>it is sort by:{{$ctrl.orderProp}}</p>
+            <p>当前排序依据：{{$ctrl.orderProp}}</p>
+            </p>
+
         </div>
         <div class="col-md-10">
-            <div class="media phone-list-item" ng-repeat="phone in $ctrl.phones | filter:$ctrl.query | orderBy:$ctrl.orderProp">
-                <a class="pull-left img-thumb" href="#!/phones/{{phone.id}}">
-                    <img class="media-object" ng-src="{{phone.imageUrl}}"
-                         alt="">
-                    <!--如果直接使用src绑定{{phone.imageUrl}}，Angular未初始化前就会展开绑定，
-                    也就会发出无效的url请求。为此，我们使用ngSrc命令，它会在Angular初始化后再进行绑定。-->
-                </a>
-                <div class="media-body">
-                    <h4 class="media-heading">
-                        <a href="#!/phones/{{phone.id}}">{{phone.name}}</a>
-                    </h4>
-                    <p>
-                        {{phone.snippet}}
-                    </p>
-                </div>
-            </div>
+            <!--Body content-->
+
+            <ul class="phones">
+                <!--//不需要 controllerAs 语法就可以在模板中直接使用默认的 $ctrl 别名,如： $ctrl.phones-->
+                <li ng-repeat="phone in $ctrl.phones | filter:$ctrl.query | orderBy: $ctrl.orderProp" class="thumbnail phone-list-item">
+                    <a href="#!/phones/{{phone.id}}" class="thumb">
+                        <!--如果直接使用src绑定{{phone.imageUrl}}，Angular未初始化前就会展开绑定，
+                        也就会发出无效的url请求。为此，我们使用ngSrc命令，它会在Angular初始化后再进行绑定。-->
+                        <img ng-src="{{phone.imageUrl}}" alt="{{phone.name}}" />
+                    </a>
+                    <a href="#!/phones/{{phone.id}}">{{phone.name}}</a>
+                    <p>{{phone.snippet}}</p>
+                </li>
+            </ul>
+
         </div>
     </div>
-    <!--just try try  可以看到json格式的手机列表-->
-    <pre>{{$ctrl.phones | filter:$ctrl.query | orderBy:$ctrl.orderProp | json}}</pre>
 </div>
+
+<pre>{{$ctrl.phones | filter:$ctrl.query | orderBy:$ctrl.orderProp | json}}</pre>
